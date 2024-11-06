@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+    font-family: 'Lexend Deca', sans-serif;
+    background-color: rgb(141,141,141);
+ 
+}
+
+button{
+    font-family: 'Lexend Deca', sans-serif;
+}
+
+input{
+        font-family: 'Lexend Deca', sans-serif;
+    
+}
+
+input::placeholder{
+    color: white;
+}

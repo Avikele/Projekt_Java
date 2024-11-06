@@ -1,0 +1,174 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background: rgb(65, 146, 107, 1);
+    align-items: center;
+    border-bottom: 2px solid lightgray;
+    position: sticky;
+    top: 0;
+    height: 60px;
+
+    button{
+        color: rgba(255, 255, 255, 1);
+        background-color: rgb(39, 88, 65);
+        border-radius: 3vh;
+        box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.45);
+        font-weight: 100;
+        font-size: 13px;
+        border: none;
+        outline: none;
+        margin-top:7%;
+        margin-bottom:7%;
+        margin-left: 5%;
+        margin-right: 20%;
+        padding: 1.2vh;    
+
+    }
+    
+    button:hover{
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.45);
+        font-size: 16px;
+    }
+    
+    button:focus{
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.45);
+        font-size: 16px;
+    }
+
+
+    .left{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 15px;
+
+
+        
+
+        .active{
+            text-decoration: none;
+            button{
+                box-shadow: inset 7px 4px 3px rgba(0, 0, 0, 0.45);
+            }
+            
+
+            button:hover{
+                box-shadow: inset 7px 4px 4px rgba(0, 0, 0, 0.45);
+                font-size: 13px;
+            }
+            
+            button:focus{
+                box-shadow: inset 7px 4px 4px rgba(0, 0, 0, 0.45);
+                font-size: 13px;
+            }
+
+            
+        }
+
+        .deactive{
+            text-decoration: none;
+        }
+        
+
+        .searchicon{
+            color: white;
+            margin-top: px;
+            margin-left: 50px;
+        }
+
+        input{
+            
+            height: 10%;
+            margin-top: 0%;
+            margin-bottom:0%;
+            margin-left: 0%;
+            margin-right: 0%;
+            padding-top: 5px;
+            padding-right: 100px;
+            background-color: transparent;
+            border-top: 0px;
+            border-left: 0px;
+            border-right: 0px;
+            border-bottom: 0.4vh  solid white;
+            line-height: 0; 
+            box-shadow: 2px 6px 2px -3px rgba(0, 0, 0, 0.45) ;
+            outline: none; 
+            font-weight: 300;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 1);  
+
+        }
+
+        input:hover{
+            box-shadow: 1px 3px 2px -3px rgba(0, 0, 0, 0.45) ;
+            font-size: 15px;
+            border-bottom: 0.45vh solid white;
+        }
+        
+        input:focus{
+            box-shadow: 1px 3px 2px -3px rgba(0, 0, 0, 0.45) ;
+            font-size: 15px;
+            border-bottom: 0.45vh solid white;
+        }
+        
+    }
+    .right{
+        display: flex;
+        margin-right: 15px;
+        align-items: center;
+        justify-content: center;
+
+        .icon{
+            color: yellow;
+  
+    
+        }
+
+       /* .counter{
+            position: absolute;
+            top: 18px;
+            right: 79px;
+            background-color: red;
+            color: white;
+            font-size: 12px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;            
+        }*/
+
+        
+
+        .active{
+            button{
+                box-shadow: inset 7px 4px 3px rgba(0, 0, 0, 0.45);
+            }
+            button:hover{
+                box-shadow: inset 7px 4px 4px rgba(0, 0, 0, 0.45);
+                font-size: 13px;
+            }
+            button:focus{
+                box-shadow: inset 7px 4px 4px rgba(0, 0, 0, 0.45);
+                font-size: 13px;
+
+            }
+        }
+
+
+        
+        
+        
+    }
+
+}
+
+@media (max-width: 480px) {
+    .navbar{
+        input{
+        display: none;
+    }
+    }
+
+}

@@ -1,0 +1,94 @@
+.card {
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+    width: 98vw;
+    /* Make the card full width */
+    height: auto;
+    background-color: rgb(84, 144, 115);
+    overflow: hidden;
+    border: 1.5px solid black;
+
+    h4 {
+        font-size: 22px;
+        font-weight: 100;
+        color: rgba(255, 255, 255, 1);
+        text-shadow: 7px 7px 4px rgba(0, 0, 0, 0.45);
+        border-bottom: 1.5px solid white;
+        margin-right: 40px;
+        margin-left: 40px;
+    }
+
+    .books {
+        display: flex;
+        overflow: scroll;
+        gap: 30px;
+        scroll-behavior: smooth;
+        margin-left: 20px;
+        margin-right: 20px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        /* For Internet Explorer and Edge */
+
+        /* For WebKit-based browsers (Chrome, Safari) */
+        &::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar */
+        }
+
+
+
+        .book {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(46, 80, 64);
+            margin-bottom: 20px;
+            border-radius: 1.5vh;
+            box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.45);
+
+            img {
+                width: 110px;
+                margin: 1.3vh;
+                height: 160px;
+                pointer-events: none;
+                border-radius: 1vh;
+                object-fit: cover;
+
+            }
+
+            p {
+                font-weight: 1000;
+                font-size: 10px;
+                color: rgba(255, 255, 255, 1);
+                margin-top: -3px;
+                margin-bottom: 20px;
+            }
+
+        }
+
+        .notdragging {
+            text-decoration: none;
+
+            .book:hover {
+                img {
+                    width: 111px;
+                }
+            }
+
+            .book:focus {
+                width: 111px;
+            }
+        }
+
+        .dragging {
+            text-decoration: none;
+
+
+        }
+
+    }
+
+
+}

@@ -1,0 +1,51 @@
+.friendProfile{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    .friendStatistics{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        background: linear-gradient(0deg, rgba(75, 164, 120, 1) 30%, rgb(48, 113, 79) 100%);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 2vh;
+        height: 80vh;
+        gap: 20px;
+        box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.2);
+        h1{
+            margin-top: 2%;
+            font-weight: 100;
+            color: rgba(255, 255, 255, 1);
+            font-size: 5vh;
+            text-shadow: 7px 7px 4px rgba(0, 0, 0, 0.45);
+        }
+        .statistics{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: rgba(0, 0, 0, 0.2);
+            width: 90%;
+            height: 60%;
+            border-radius: 2vh;
+            box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.2);
+            overflow: scroll;
+            gap: 2px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            /* For Internet Explorer and Edge */
+
+            /* For WebKit-based browsers (Chrome, Safari) */
+            &::-webkit-scrollbar {
+                display: none;
+                /* Hide scrollbar */
+            }
+            p{
+                color: rgba(255,255,255.1);
+            }
+        }
+    }
+}

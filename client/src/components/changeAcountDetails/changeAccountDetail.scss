@@ -1,0 +1,117 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; // Ensure the modal is above other content
+    
+  }
+  
+  .modal-content {
+    height: 40vh;
+    width: 40vh;
+    border-radius: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(37, 126, 81, 0.9);
+    
+
+    h2{
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 100;
+        font-size: 2vh;
+        margin: 0px;
+        color: rgba(255, 255, 255, 1);
+        
+    }
+
+    p{
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 100;
+        font-size: 1.5vh;
+        padding-bottom: 20px;
+        margin: 1px;
+        margin-bottom: 5%;
+        color: rgba(255, 255, 255, 1);
+        text-align: center;
+    }
+
+    input{
+        height: 10%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 0%;
+        margin-right: 0%;
+        padding-top: 10px;
+        background-color: transparent;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 0.4vh  solid white;
+        line-height: 0; 
+        box-shadow: 2px 6px 2px -3px rgba(0, 0, 0, 0.45) ;
+        outline: none; 
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 100;
+        font-size: 2vh;
+        color: rgba(255, 255, 255, 1);          
+    }
+
+    input:hover{
+        box-shadow: 1px 3px 2px -3px rgba(0, 0, 0, 0.45) ;
+        font-size: 2.2vh;
+        border-bottom: 0.5vh solid white;
+    }
+    
+    input:focus{
+        box-shadow: 1px 3px 2px -3px rgba(0, 0, 0, 0.45) ;
+        font-size: 2.2vh;
+        border-bottom: 0.5vh solid white;
+    }
+
+    input:placeholder{
+        text-shadow: 7px 7px 4px rgba(0, 0, 0, 0.45);
+    }
+
+    button{
+        width: 30vh;
+        margin-top: 2%;
+        margin-bottom: 4%;
+        margin-left: 0%;
+        margin-right: 0%;
+        padding: 1.2vh;
+        border-radius: 3vh;
+        box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.45);
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 100;
+        font-size: 2vh;
+        color: rgba(255, 255, 255, 1);
+        background-color: rgb(12, 61, 43);
+        border: none;
+        outline: none;
+    }
+
+    button:hover{
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.45);
+        font-size: 2.2vh;
+    }
+    
+    button:focus{
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.45);
+        font-size: 2.2vh;
+    }
+  }
+
+  @media only screen and (max-width: 480px){
+
+    .modal-content{
+        width: 90%;
+    }
+  }

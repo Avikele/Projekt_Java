@@ -1,0 +1,149 @@
+.modal-overlay-newfriend {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; // Zapewnia, że modal jest nad innymi elementami
+    
+    
+    .modal-add-friend-content {
+        gap: 80px;
+        height: 80vh;
+        width: 70vw;
+        border-radius: 5vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgba(37, 126, 81, 0.9);
+
+
+        h2 {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 100;
+            font-size: 4vh;
+            margin: 0;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        p {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 100;
+            font-size: 2vh;
+            padding-bottom: 20px;
+            margin: 1px;
+            margin-bottom: 5%;
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+        }
+
+        .friends-newfriend {
+            background-color: rgba(0, 0, 0, 0.24);
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: -4px 4px 7px rgba(0, 0, 0, 0.5) inset;
+            width: 50vw;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow: scroll;
+            height: 80%;
+
+            scrollbar-width: none;
+
+
+        -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+    
+        /* For WebKit-based browsers (Chrome, Safari) */
+        &::-webkit-scrollbar {
+            display: none; /* Hide scrollbar */
+        }
+            
+
+            input {
+                height: 10%;
+                margin: 2% 0;
+                padding-top: 10px;
+                background-color: transparent;
+                border: none;
+                border-bottom: 1px solid white;
+                line-height: 0;
+                box-shadow: 2px 6px 2px -3px rgba(0, 0, 0, 0.45);
+                outline: none;
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: 100;
+                font-size: 2vh;
+                color: rgba(255, 255, 255, 1);
+                
+
+                &:hover,
+                &:focus {
+                    box-shadow: 1px 3px 2px -3px rgba(0, 0, 0, 0.45);
+                    font-size: 2.2vh;
+                    border-bottom: 3px solid white;
+                }
+
+                &::placeholder {
+                    text-shadow: 7px 7px 4px rgba(0, 0, 0, 0.45);
+                }
+            }
+
+            button.show {
+                width: 20vh;
+                margin: 2% 0 4%;
+                padding: 1.2vh;
+                border-radius: 3vh;
+                box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.45);
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: 100;
+                font-size: 1.5vh;
+                color: rgba(255, 255, 255, 1);
+                background-color: rgb(12, 61, 43);
+                border: none;
+                outline: none;
+
+                &:hover,
+                &:focus {
+                    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.45);
+                    font-size: 1.7vh;
+                }
+            }
+
+            gap: 10px;
+
+            .friend-newfriend {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 80%;
+                background-color: rgba(37, 126, 81, 0.9);
+                border-radius: 10px;
+                padding: 10px;
+                box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.24);
+                p {
+                    margin-bottom: -19px;
+                }
+            }
+        }
+    }
+
+    // Media query dla mniejszych ekranów
+    @media only screen and (max-width: 480px) {
+        .modal-add-friend-content {
+            width: 90vw;
+            gap: 20px;
+
+            .friends-newfriend {
+                .friend-newfriend {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}

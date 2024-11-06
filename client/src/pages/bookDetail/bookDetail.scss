@@ -1,0 +1,151 @@
+.book-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+
+
+    button {
+        background-color: rgb(39, 88, 65);
+        border-radius: 2vh;
+        padding: 5px;
+        margin-bottom: 10px;
+        color: white;
+        outline: none;
+        border: none;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .star {
+        color: yellow;
+    }
+
+    h2 {
+        color: white;
+        border-bottom: 1px solid white;
+        width: 90%;
+        text-align: center;
+    }
+
+    p {
+        color: white;
+
+    }
+
+
+    .book-and-rating {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        gap: 100px;
+
+        .book-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            .book-cover {
+                background-color: rgba(95, 95, 95, 1);
+                border-radius: 2vh;
+                box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+
+                img {
+                    margin: 20PX;
+                    width: 220px;
+                    height: 280px;
+                    border-radius: 1vh;
+                    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+                }
+            }
+
+            .book-rating {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 300px;
+            }
+        }
+
+        .user-ratings {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            gap: 10px;
+
+            textarea{
+                width: 85%;
+                border-radius: 1vh;
+                border: none;
+                box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.2);
+                
+            }
+
+            .submit {
+                display: flex;
+            }
+
+
+        }
+    }
+
+
+
+    .reviews {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        .review {
+            width: 30%;
+            background-color: white;
+            border-radius: 2vh;
+            box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.2);
+            height: 250px;
+            p{
+                color: black;
+            }
+        }
+
+    }
+}
+
+
+@media (max-width: 1000px){
+
+    .book-detail{
+        .book-and-rating{
+            flex-direction: column;
+        }
+    }
+
+}
+
+@media (max-width: 500px){
+
+    .book-detail{
+        .book-and-rating{
+            flex-direction: column;
+            .book-card{
+                flex-direction: column;
+            }
+            .user-ratings{
+                width: 90%;
+            }
+        }
+
+        .reviews{
+            .review{
+                width: 70%;
+            }
+        }
+    }
+
+}
