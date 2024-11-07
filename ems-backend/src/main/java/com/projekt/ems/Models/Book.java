@@ -34,7 +34,7 @@ public class Book {
     private boolean status;
 
     @Column(name = "avgRating")
-    private Double AvgRating;
+    private Double avgRating;
 
     @ManyToMany
     @JoinTable(
@@ -48,11 +48,6 @@ public class Book {
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 
-    @ManyToMany
-    @JoinTable(
-            name = "book_category",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private Set<Category> categories = new HashSet<>();
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserBook> userBooks = new HashSet<>();  // Relationship with UserBook
 }
