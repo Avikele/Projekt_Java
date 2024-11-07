@@ -23,9 +23,12 @@ public class UserBook {
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status", length = 5)
+    private Integer status;
 
     @OneToOne(mappedBy = "userBook", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Rating rating;  // One-to-One relationship with Rating
+    private Rating rating;
+
+    @OneToOne(mappedBy = "userBook", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Review review;
 }

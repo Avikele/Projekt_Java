@@ -21,19 +21,19 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false, length = 45)
     private String title;
 
-    @Column(name = "pages", nullable = false)
+    @Column(name = "pages", nullable = false, length = 11)
     private Integer pages;
 
-    @Column(name = "cover")
+    @Column(name = "cover", length = 45)
     private String cover;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false, length = 11)
     private boolean status;
 
-    @Column(name = "avgRating")
+    @Column(name = "avgRating", nullable = false, length = 11)
     private Double avgRating;
 
     @ManyToMany
