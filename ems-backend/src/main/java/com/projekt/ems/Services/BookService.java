@@ -1,36 +1,18 @@
 package com.projekt.ems.Services;
 
-import com.projekt.ems.Repositories.BookRepository;
-import com.projekt.ems.Models.Book;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.projekt.ems.Dto.BookDto;
 import java.util.List;
-import java.util.Optional;
 
 
-@Service
-public class BookService {
 
-    private final BookRepository bookRepository;
 
-    @Autowired
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+public interface BookService {
 
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
-    }
+    List<BookDto> findAllBooks();
+    BookDto findBookById(Long id);
+    BookDto saveBook(BookDto book);
+    BookDto updateBook(Long id, BookDto book);
+    void deleteBook(Long id);
 
-    public Optional<Book> getBookById(Long id){
-        return bookRepository.findById(id);
-    }
 
-    public Book saveBook(Book book) {
-        return bookRepository.save(book);
-    }
-
-    public void deleteBook(Long id){
-        bookRepository.deleteById(id);
-    }
 }
