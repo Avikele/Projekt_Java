@@ -15,10 +15,12 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_book_id", nullable = false)
+    private UserBook userBook;
+
     @Column(name = "score", nullable = false, length = 3)
     private int score;
 
-    @OneToOne
-    @JoinColumn(name = "user_book_id", nullable = false)
-    private UserBook userBook;
 }

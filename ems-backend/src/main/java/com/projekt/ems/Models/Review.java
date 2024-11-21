@@ -12,8 +12,12 @@ import lombok.*;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_book_id", nullable = false)
+    private UserBook userBook;
 
     @Column(name = "text", nullable = false, length = 500)
     private String text;
@@ -21,7 +25,4 @@ public class Review {
     @Column(name = "status", nullable = false, length = 5)
     private Integer status;
 
-    @OneToOne
-    @JoinColumn(name = "user_book_id", nullable = false)
-    private UserBook userBook;
 }
