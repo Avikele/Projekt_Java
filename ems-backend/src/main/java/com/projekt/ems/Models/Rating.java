@@ -20,5 +20,5 @@ public class Rating {
 
     @OneToOne
     @JoinColumn(name = "user_book_id", nullable = false)
-    private UserBook userBook;  // Relationship with UserBook
+    private UserBook userBook;
 }

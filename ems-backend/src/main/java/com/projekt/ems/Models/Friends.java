@@ -16,16 +16,16 @@ public class Friends {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;  // Identyfikator relacji (np. dla zapytania)
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id1", nullable = false)
-    private User user1;  // Pierwszy użytkownik w relacji
+    private User user1;
 
     @ManyToOne
     @JoinColumn(name = "user_id2", nullable = false)
-    private User user2;  // Drugi użytkownik w relacji
+    private User user2;
 
     @Column(name = "status", nullable = false, length = 11)
-    private Integer status;  // Status relacji (0 - oczekiwanie, 1 - zaakceptowane, 2 - odrzucone)
+    private Integer status;
 }

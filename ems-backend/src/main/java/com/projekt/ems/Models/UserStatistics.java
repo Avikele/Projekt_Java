@@ -19,18 +19,18 @@ public class UserStatistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;  // Dodajemy id, ponieważ jest to często wymagane w każdej tabeli encji
+    private long id;
 
     @Column(name = "pagesRead", nullable = false, length = 11)
-    private int pagesRead;  // Liczba przeczytanych stron
+    private int pagesRead;
 
     @Column(name = "time")
-    private LocalTime time;  // Czas spędzony na czytaniu
+    private LocalTime time;
 
     @Column(name = "ReadDate")
-    private LocalDate readDate;  // Data, kiedy książka została przeczytana
+    private LocalDate readDate;
 
     @ManyToOne
     @JoinColumn(name = "user_book_id", nullable = false)
-    private UserBook userBook;  // Klucz obcy wskazujący na UserBook (relacja ManyToOne)
+    private UserBook userBook;
 }

@@ -63,7 +63,7 @@ public class PublisherServiceImpl implements PublisherService {
 
     private PublisherDto mapToPublisherDto(Publisher publisher) {
         if (publisher == null) {
-            return null;
+            throw new RuntimeException("Publisher is null");
         }
 
         return PublisherDto.builder()

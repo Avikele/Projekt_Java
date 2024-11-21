@@ -57,7 +57,7 @@ public class Book {
     private Publisher publisher;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserBook> userBooks = new HashSet<>();  // Relationship with UserBook
+    private Set<UserBook> userBooks = new HashSet<>();
 
 
 
