@@ -54,7 +54,7 @@ public class User {
     private Integer pagesRead;
 
     @Column(name = "time")
-    private LocalTime time;  // Nowe pole typu LocalTime, nullable
+    private LocalTime time;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserBook> userBooks = new HashSet<>();
