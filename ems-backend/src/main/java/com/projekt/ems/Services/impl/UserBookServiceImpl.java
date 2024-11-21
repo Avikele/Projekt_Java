@@ -30,6 +30,14 @@ public class UserBookServiceImpl implements UserBookService {
         return mapToUserBookDto(userBook);
     }
 
+    public UserBookDto getOrCreateUserBook(Long userId, Long bookId) {
+        UserBook result = userBookRepository.getUserBook(userId, bookId);
+        if (result != null) {
+            return mapToUserBookDto(result);
+        }
+        return saveUserBook(new UserBookDto(0L, userId, bookId, 0));
+    }
+
     public UserBookDto saveUserBook(UserBookDto userBookDto) {
         UserBook userBook = new UserBook();
         Book book = bookRepository.findById(userBookDto.getBook_id()).orElseThrow(() -> new RuntimeException("Book not found"));
@@ -37,6 +45,19 @@ public class UserBookServiceImpl implements UserBookService {
         userBook.setBook(book);
         userBook.setUser(user);
         userBook.setStatus(userBookDto.getStatus());
+
+        UserBook saveUserBook = userBookRepository.save(userBook);
+        return mapToUserBookDto(saveUserBook);
+    }
+
+    @Override
+    public UserBookDto crateUserBook(Long userId, Long bookId, Integer status) {
+        UserBook userBook = new UserBook();
+        Book book = bookRepository.findById(userId).orElseThrow(() -> new RuntimeException("Book not found"));
+        User user = userRepository.findById(bookId).orElseThrow(() -> new RuntimeException("User not found"));
+        userBook.setBook(book);
+        userBook.setUser(user);
+        userBook.setStatus(status);
 
         UserBook saveUserBook = userBookRepository.save(userBook);
         return mapToUserBookDto(saveUserBook);

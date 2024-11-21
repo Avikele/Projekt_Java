@@ -20,6 +20,15 @@ public class UserBookController {
         this.userBookService = userBookService;
     }
 
+    @GetMapping("/")
+    public ResponseEntity<UserBookDto> getUserBook(@RequestParam Long user_id, @RequestParam Long book_id) {
+        UserBookDto userBook = userBookService.getOrCreateUserBook(user_id, book_id);
+        if (userBook == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(userBook);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserBookDto> findUserBookById(@PathVariable Long id) {
         UserBookDto userBook = userBookService.findUserBookById(id);
