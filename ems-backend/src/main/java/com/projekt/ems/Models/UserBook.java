@@ -23,7 +23,7 @@ public class UserBook {
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    @Column(name = "status", length = 5)
+    @Column(name = "status", nullable = false, length = 5)
     private Integer status;
 
     @OneToOne(mappedBy = "userBook", cascade = CascadeType.ALL, orphanRemoval = true)

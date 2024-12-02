@@ -21,6 +21,11 @@ public class UserStatistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "user_book_id", nullable = false)
+    private UserBook userBook;
+
     @Column(name = "pagesRead", nullable = false, length = 11)
     private int pagesRead;
 
@@ -30,7 +35,4 @@ public class UserStatistics {
     @Column(name = "ReadDate")
     private LocalDate readDate;
 
-    @ManyToOne
-    @JoinColumn(name = "user_book_id", nullable = false)
-    private UserBook userBook;
 }
