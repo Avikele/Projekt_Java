@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
     public UserDto findUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         return userToUserDto(user);
-
     }
 
     @Override
@@ -65,8 +64,6 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userDto.getFirstName());
         user.setSurName(userDto.getSurName());
         user.setEmail(userDto.getEmail());
-        user.setPrivilages(userDto.getPrivilages());
-        user.setStatus(userDto.getStatus());
         User savedUser = userRepository.save(user);
 
         return userToUserDto(savedUser);
@@ -83,20 +80,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new RuntimeException("User not found");
         }
-
-
-
-        return UserDto.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .email(user.getEmail())
-                .firstName(user.getFirstName())
-                .surName(user.getSurName())
-                .creationDate(user.getCreationDate())
-                .status(user.getStatus())
-                .privilages(user.getPrivilages())
-                .build();
+        return new UserDto(user);
     }
 
 }
