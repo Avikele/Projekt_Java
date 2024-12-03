@@ -57,6 +57,17 @@ public class ReadingSessionServiceImpl implements ReadingSessionService {
     }
 
     @Override
+    public void importReadingSessions(List<ReadingSessionDto> readingSessions, UserStatistics userStatistics) {
+        readingSessions.forEach((readingSessionDto -> {
+            ReadingSession newReadingSession = new ReadingSession();
+            newReadingSession.setUserStatistics(userStatistics);
+            newReadingSession.setTime(readingSessionDto.getTime());
+            newReadingSession.setPages(readingSessionDto.getPages());
+            readingSessionRepository.save(newReadingSession);
+        }));
+    }
+
+    @Override
     public ReadingSessionDto updateReadingSession(Long id, ReadingSessionDto readingSessionDto) {
         ReadingSession readingSession = readingSessionRepository.findById(id).orElseThrow(() -> new RuntimeException("Reading session not found"));
         userStatisticsService.returnUserStatistics(readingSession);

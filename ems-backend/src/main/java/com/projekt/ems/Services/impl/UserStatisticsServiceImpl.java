@@ -1,17 +1,22 @@
 package com.projekt.ems.Services.impl;
 
+import com.projekt.ems.Dto.ExportDto;
+import com.projekt.ems.Dto.ReadingSessionDto;
 import com.projekt.ems.Dto.UserBookDto;
 import com.projekt.ems.Dto.UserStatisticsDto;
 import com.projekt.ems.Models.*;
 import com.projekt.ems.Repositories.UserBookRepository;
 import com.projekt.ems.Repositories.UserStatisticsRepository;
+import com.projekt.ems.Services.ReadingSessionService;
 import com.projekt.ems.Services.UserBookService;
 import com.projekt.ems.Services.UserService;
 import com.projekt.ems.Services.UserStatisticsService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Service
 public class UserStatisticsServiceImpl implements UserStatisticsService {
@@ -19,13 +24,15 @@ public class UserStatisticsServiceImpl implements UserStatisticsService {
     private final UserStatisticsRepository userStatisticsRepository;
     private final UserBookService userBookService;
     private final UserBookRepository userBookRepository;
+    private final ReadingSessionService readingSessionService;
     private final UserService userService;
 
-    public UserStatisticsServiceImpl(UserStatisticsRepository userStatisticsRepository, UserBookService userBookService, UserBookRepository userBookRepository, UserService userService) {
+    public UserStatisticsServiceImpl(UserStatisticsRepository userStatisticsRepository, UserBookService userBookService, UserBookRepository userBookRepository, UserService userService, @Lazy ReadingSessionService readingSessionService) {
         this.userStatisticsRepository = userStatisticsRepository;
         this.userBookService = userBookService;
         this.userBookRepository = userBookRepository;
         this.userService = userService;
+        this.readingSessionService = readingSessionService;
     }
 
     @Override
@@ -36,7 +43,6 @@ public class UserStatisticsServiceImpl implements UserStatisticsService {
 
     @Override
     public UserStatisticsDto getOrCrateUserStatistics(Long userId, Long bookId) {
-
         UserBookDto userBookDto = userBookService.getOrCreateUserBook(userId, bookId);
         UserBook userBook = userBookRepository.findById(userBookDto.getId()).orElseThrow(() -> new RuntimeException("User book not found"));
         UserStatistics userStatistics = userStatisticsRepository.findById(userBook.getId()).orElse(null);
@@ -50,6 +56,26 @@ public class UserStatisticsServiceImpl implements UserStatisticsService {
             return new UserStatisticsDto(saveUserStatistics);
         }
         return new UserStatisticsDto(userStatistics);
+    }
+
+    @Override
+    public ExportDto exportUserStatistics(Long id) {
+        UserStatistics userStatistics = userStatisticsRepository.findById(id).orElseThrow(() -> new RuntimeException("User statistics not found"));
+        List<ReadingSessionDto> sessions = readingSessionService.getAllReadingSession(id);
+        return new ExportDto(userStatistics, sessions);
+    }
+
+    @Override
+    public void importUserStatistics(Long userId, Long bookId, ExportDto exportDto) {
+        UserStatisticsDto userStatisticsDto = this.getOrCrateUserStatistics(userId, bookId);
+        UserStatistics userStatistics = userStatisticsRepository.findById(userStatisticsDto.getUser_book_id()).orElseThrow(() -> new RuntimeException("User statistics not found"));
+        if(userStatistics.getPagesRead() > 0) {
+            throw new RuntimeException("User statistics are not empty. Can not import new one.");
+        }
+        userStatistics.setPagesRead(exportDto.getReadPages());
+        userStatistics.setTime(exportDto.getReadingTime());
+        readingSessionService.importReadingSessions(exportDto.getSessions(), userStatistics);
+        userStatisticsRepository.save(userStatistics);
     }
 
     @Override
