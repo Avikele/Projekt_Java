@@ -152,6 +152,24 @@ public class BookServiceImpl implements BookService{
         bookRepository.deleteById(id);
     }
 
+    @Override
+    public void addRating(Integer rating, Book book) {
+        if(rating < 1 || rating > 5) {
+            throw new RuntimeException("Wrong rating!");
+        }
+        book.setAvgRating((double)(book.getAvgRating() * book.getCountRating() + rating) / (book.getCountRating() + 1));
+        bookRepository.save(book);
+    }
+
+    @Override
+    public void removeRating(Integer rating, Book book) {
+        if(rating < 1 || rating > 5) {
+            throw new RuntimeException("Wrong rating!");
+        }
+        book.setAvgRating((double)(book.getAvgRating() * book.getCountRating() - rating) / (book.getCountRating() - 1));
+        bookRepository.save(book);
+    }
+
     private BookDto mapToBookDto(Book book) {
         BookDto bookDto = BookDto.builder()
                 .id(book.getId())
