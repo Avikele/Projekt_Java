@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserStatisticsServiceImpl implements UserStatisticsService {
@@ -74,8 +75,18 @@ public class UserStatisticsServiceImpl implements UserStatisticsService {
         }
         userStatistics.setPagesRead(exportDto.getReadPages());
         userStatistics.setTime(exportDto.getReadingTime());
+        userStatistics.setReadDate(exportDto.getReadDate());
         readingSessionService.importReadingSessions(exportDto.getSessions(), userStatistics);
         userStatisticsRepository.save(userStatistics);
+        if(Objects.equals(exportDto.getBookPages(), exportDto.getReadPages())) {
+            userBookService.updateUserBookStatus(userStatistics.getUserBook().getId(), 3);
+            userService.addReadBook(userStatistics.getUserBook().getUser());
+        }
+        else {
+            userBookService.updateUserBookStatus(userStatistics.getUserBook().getId(), 2);
+        }
+        userService.addTime(exportDto.getReadingTime(), userStatistics.getUserBook().getUser());
+        userService.addPagesRead(exportDto.getReadPages(), userStatistics.getUserBook().getUser());
     }
 
     @Override
@@ -133,6 +144,19 @@ public class UserStatisticsServiceImpl implements UserStatisticsService {
         userStatisticsRepository.save(userStatistics);
         userService.removeTime(readingSession.getTime(), user);
         userService.removePagesRead(readingSession.getPages(), user);
+    }
+
+    @Override
+    public void deleteUserStatistics(Long id) {
+        UserStatistics userStatistics = userStatisticsRepository.findById(id).orElseThrow(() -> new RuntimeException("User statistics not found"));
+        User user = userStatistics.getUserBook().getUser();
+        readingSessionService.deleteAllReadingSessions(userStatistics.getId());
+        if(userStatistics.getReadDate() == null) {
+            userService.removeReadBook(user);
+        }
+        userService.removePagesRead(userStatistics.getPagesRead(), user);
+        userService.removeTime(userStatistics.getTime(), user);
+        userStatisticsRepository.delete(userStatistics);
     }
 
 }

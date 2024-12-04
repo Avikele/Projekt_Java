@@ -28,4 +28,9 @@ public class RatingController {
         RatingDto rating = ratingService.updateRating(id, ratingDto);
         return ResponseEntity.ok(rating);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRating(@PathVariable Long id){
+        return ResponseEntity.accepted().build();
+    }
 }

@@ -84,4 +84,9 @@ public class ReadingSessionServiceImpl implements ReadingSessionService {
         userStatisticsService.returnUserStatistics(readingSession);
         readingSessionRepository.delete(readingSession);
     }
+
+    @Override
+    public void deleteAllReadingSessions(Long userStatisticsId) {
+        readingSessionRepository.deleteAllReadingSessions(userStatisticsId);
+    }
 }
