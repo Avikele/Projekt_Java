@@ -6,6 +6,7 @@ import com.projekt.ems.Models.Rating;
 import com.projekt.ems.Models.UserBook;
 import com.projekt.ems.Repositories.RatingRepository;
 import com.projekt.ems.Repositories.UserBookRepository;
+import com.projekt.ems.Services.BookService;
 import com.projekt.ems.Services.RatingService;
 import com.projekt.ems.Services.UserBookService;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,13 @@ public class RatingServiceImpl implements RatingService {
     private RatingRepository ratingRepository;
     private UserBookRepository userBookRepository;
     private UserBookService userBookService;
+    private BookService bookService;
 
-    public RatingServiceImpl(RatingRepository ratingRepository, UserBookRepository userBookRepository, UserBookService userBookService) {
+    public RatingServiceImpl(RatingRepository ratingRepository, UserBookRepository userBookRepository, UserBookService userBookService, BookService bookService) {
         this.ratingRepository = ratingRepository;
         this.userBookRepository = userBookRepository;
         this.userBookService = userBookService;
+        this.bookService = bookService;
     }
 
     @Override
@@ -31,19 +34,24 @@ public class RatingServiceImpl implements RatingService {
         rating.setUserBook(userBook);
         rating.setScore(ratingDto.getScore());
         Rating saveRating = ratingRepository.save(rating);
+        bookService.addRating(rating.getScore(), rating.getUserBook().getBook());
         return new RatingDto(saveRating.getId(), saveRating.getScore());
     }
 
     @Override
     public RatingDto updateRating(Long id, RatingDto ratingDto) {
         Rating rating = ratingRepository.findById(id).orElseThrow(() -> new RuntimeException("Rating not found"));
+        bookService.removeRating(rating.getScore(), rating.getUserBook().getBook());
         rating.setScore(ratingDto.getScore());
         Rating saveRating = ratingRepository.save(rating);
+        bookService.addRating(rating.getScore(), rating.getUserBook().getBook());
         return new RatingDto(saveRating.getId(), saveRating.getScore());
     }
 
     @Override
     public void deleteRating(Long id) {
+        Rating rating = ratingRepository.findById(id).orElseThrow(() -> new RuntimeException("Rating not found"));
+        bookService.removeRating(rating.getScore(), rating.getUserBook().getBook());
         ratingRepository.deleteById(id);
     }
 }

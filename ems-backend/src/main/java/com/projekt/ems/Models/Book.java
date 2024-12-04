@@ -36,6 +36,9 @@ public class Book {
     @Column(name = "avgRating", nullable = false, length = 11)
     private Double avgRating;
 
+    @Column(name = "countRating", nullable = false, length = 11)
+    private Integer countRating;
+
     @ManyToMany
     @JoinTable(
             name = "book_has_author",
