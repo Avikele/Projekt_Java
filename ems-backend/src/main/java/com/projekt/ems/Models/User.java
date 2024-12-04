@@ -44,16 +44,13 @@ public class User {
     @Column(name = "creation_date", nullable = false, updatable = false)
     private LocalDate creationDate;
 
-    @Column(name = "bookReadLastMonth", length = 11)
-    private Integer bookReadLastMonth;
+    @Column(name = "bookRead", nullable = false, length = 11)
+    private Integer bookRead;
 
-    @Column(name = "bookReadLastYear", length = 11)
-    private Integer bookReadLastYear;
-
-    @Column(name = "pagesRead", length = 11)
+    @Column(name = "pagesRead", nullable = false, length = 11)
     private Integer pagesRead;
 
-    @Column(name = "time")
+    @Column(name = "time", nullable = false)
     private LocalTime time;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

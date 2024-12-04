@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,6 +76,43 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public void addTime(LocalTime time, User user) {
+        user.setTime(user.getTime().plusHours(time.getHour())
+                .plusMinutes(time.getMinute())
+                .plusSeconds(time.getSecond()));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void removeTime(LocalTime time, User user) {
+        user.setTime(user.getTime().minusHours(time.getHour())
+                .minusMinutes(time.getMinute())
+                .minusSeconds(time.getSecond()));
+    }
+
+    @Override
+    public void addReadBook(User user) {
+        user.setBookRead(user.getBookRead() + 1);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void removeReadBook(User user) {
+        user.setBookRead(user.getBookRead() - 1);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void addPagesRead(Integer pages, User user) {
+        user.setPagesRead(user.getPagesRead() + pages);
+        userRepository.save(user);
+    }
+
+    public void removePagesRead(Integer pages, User user) {
+        user.setPagesRead(user.getPagesRead() - pages);
+        userRepository.save(user);
+    }
 
     private UserDto userToUserDto(User user) {
         if (user == null) {
