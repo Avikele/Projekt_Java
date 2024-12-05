@@ -22,15 +22,27 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> users = userService.findAllUsers();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<UserDto>> getAllUsers(@RequestAttribute("privilages") int privilages) {
+        if(privilages==1) {
+            List<UserDto> users = userService.findAllUsers();
+            return ResponseEntity.ok(users);
+        }else {
+            return ResponseEntity.status(403).build();
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
-        UserDto user = userService.findUserById(id);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id, @RequestAttribute("privilages")int privilages,@RequestAttribute("Id") long Id) {
+
+        if(privilages==0 && Id == id) {
+            UserDto user = userService.findUserById(id);
+            return ResponseEntity.ok(user);
+        } else if (privilages == 1) {
+            UserDto user = userService.findUserById(id);
+            return ResponseEntity.ok(user);
+        }else{
+            return ResponseEntity.status(403).body(null);
+        }
     }
 
     @PostMapping("/")

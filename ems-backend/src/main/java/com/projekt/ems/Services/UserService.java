@@ -1,5 +1,6 @@
 package com.projekt.ems.Services;
 
+
 import com.projekt.ems.Dto.UserDto;
 import com.projekt.ems.Models.User;
 
@@ -18,4 +19,5 @@ public interface UserService {
     void removeReadBook(User user);
     void addPagesRead(Integer pages, User user);
     void removePagesRead(Integer pages, User user);
+
 }

@@ -44,9 +44,14 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookDto> updateBook(@PathVariable Long id, @RequestBody BookDto bookDto) {
-        BookDto book = bookService.updateBook(id, bookDto);
-        return ResponseEntity.ok(book);
+    public ResponseEntity<BookDto> updateBook(@PathVariable Long id, @RequestBody BookDto bookDto, @RequestAttribute("privilages") int privilages) {
+        if(privilages == 1) {
+            BookDto book = bookService.updateBook(id, bookDto);
+            return ResponseEntity.ok(book);
+        }
+        else{
+            return ResponseEntity.status(402).build();
+        }
     }
 
     @DeleteMapping("/{id}")
