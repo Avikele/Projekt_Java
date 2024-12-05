@@ -13,4 +13,5 @@ public interface UserStatisticsService {
     UserStatisticsDto updateUserStatistics(Long id, UserStatisticsDto userStatisticsDto);
     void calculateUserStatistics(ReadingSession readingSession);
     void returnUserStatistics(ReadingSession readingSession);
+    void deleteUserStatistics(Long id);
 }

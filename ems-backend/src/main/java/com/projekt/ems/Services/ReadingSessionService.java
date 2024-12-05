@@ -12,4 +12,5 @@ public interface ReadingSessionService {
     void importReadingSessions(List<ReadingSessionDto> readingSessions, UserStatistics userStatistics);
     ReadingSessionDto updateReadingSession(Long id, ReadingSessionDto readingSessionDto);
     void deleteReadingSession(Long id);
+    void deleteAllReadingSessions(Long userStatisticsId);
 }

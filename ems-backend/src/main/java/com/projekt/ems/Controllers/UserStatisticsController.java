@@ -73,4 +73,10 @@ public class UserStatisticsController {
         UserStatisticsDto userStatistics = userStatisticsService.updateUserStatistics(id, userStatisticsDto);
         return ResponseEntity.ok(userStatistics);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUserStatistic(@PathVariable Long id) {
+        userStatisticsService.deleteUserStatistics(id);
+        return ResponseEntity.accepted().build();
+    }
 }

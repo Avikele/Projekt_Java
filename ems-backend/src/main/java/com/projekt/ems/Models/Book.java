@@ -39,6 +39,9 @@ public class Book {
     @Column(name = "countRating", nullable = false, length = 11)
     private Integer countRating;
 
+    @Column(name = "sumRating", nullable = false, length = 11)
+    private Integer sumRating;
+
     @ManyToMany
     @JoinTable(
             name = "book_has_author",

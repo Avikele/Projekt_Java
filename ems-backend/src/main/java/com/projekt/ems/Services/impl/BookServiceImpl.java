@@ -53,7 +53,9 @@ public class BookServiceImpl implements BookService{
         book.setPages(bookDto.getPages());
         book.setCover(bookDto.getCover());
         book.setStatus(bookDto.isStatus());
-        book.setAvgRating(bookDto.getAvgRating());
+        book.setAvgRating(0d);
+        book.setCountRating(0);
+        book.setSumRating(0);
 
         if (bookDto.getPublisher() != null) {
             Publisher publisher = publisherRepository.findByName(bookDto.getPublisher())
@@ -157,7 +159,13 @@ public class BookServiceImpl implements BookService{
         if(rating < 1 || rating > 5) {
             throw new RuntimeException("Wrong rating!");
         }
-        book.setAvgRating((double)(book.getAvgRating() * book.getCountRating() + rating) / (book.getCountRating() + 1));
+        book.setSumRating(book.getSumRating() + rating);
+        book.setCountRating(book.getCountRating() + 1);
+        if (book.getCountRating() > 0) {
+            book.setAvgRating((double) book.getSumRating() / book.getCountRating());
+        } else {
+            book.setAvgRating(0.0);
+        }
         bookRepository.save(book);
     }
 
@@ -166,7 +174,13 @@ public class BookServiceImpl implements BookService{
         if(rating < 1 || rating > 5) {
             throw new RuntimeException("Wrong rating!");
         }
-        book.setAvgRating((double)(book.getAvgRating() * book.getCountRating() - rating) / (book.getCountRating() - 1));
+        book.setSumRating(book.getSumRating() - rating);
+        book.setCountRating(book.getCountRating() - 1);
+        if (book.getCountRating() > 0) {
+            book.setAvgRating((double) book.getSumRating() / book.getCountRating());
+        } else {
+            book.setAvgRating(0.0);
+        }
         bookRepository.save(book);
     }
 
