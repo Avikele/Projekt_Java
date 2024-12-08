@@ -23,7 +23,7 @@ public class User {
     @Column(name = "username", unique = true, nullable = false, length = 50)
     private String username;
 
-    @Column(name = "password", unique = true, nullable = false, length = 40)
+    @Column(name = "password", unique = true, nullable = false, length = 80)
     private String password;
 
     @Column(name = "email", unique = true, nullable = false, length = 100)
@@ -44,13 +44,13 @@ public class User {
     @Column(name = "creation_date", nullable = false, updatable = false)
     private LocalDate creationDate;
 
-    @Column(name = "bookRead", nullable = false, length = 11)
+    @Column(name = "bookRead", nullable = true, length = 11)
     private Integer bookRead;
 
-    @Column(name = "pagesRead", nullable = false, length = 11)
+    @Column(name = "pagesRead", nullable = true, length = 11)
     private Integer pagesRead;
 
-    @Column(name = "time", nullable = false)
+    @Column(name = "time", nullable = true)
     private LocalTime time;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

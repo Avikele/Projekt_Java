@@ -6,6 +6,8 @@ import com.projekt.ems.Errors.EmailAlreadyExistsException;
 import com.projekt.ems.Repositories.UserRepository;
 import com.projekt.ems.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,10 +19,13 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
+
     }
 
     @Override
@@ -41,7 +46,7 @@ public class UserServiceImpl implements UserService {
     public UserDto saveUser(UserDto userDto){
         User user = new User();
         user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setFirstName(userDto.getFirstName());
         user.setSurName(userDto.getSurName());
         user.setEmail(userDto.getEmail());
@@ -109,10 +114,13 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+
+
     public void removePagesRead(Integer pages, User user) {
         user.setPagesRead(user.getPagesRead() - pages);
         userRepository.save(user);
     }
+
 
     private UserDto userToUserDto(User user) {
         if (user == null) {
@@ -120,5 +128,6 @@ public class UserServiceImpl implements UserService {
         }
         return new UserDto(user);
     }
+
 
 }
